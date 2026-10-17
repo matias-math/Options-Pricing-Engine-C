@@ -2,7 +2,7 @@
 #include <iomanip>
 #include "black_scholes.h"
 
-//Running Test of Black-Scholes
+//Running Test of Black-Scholes (Not being used anymore, but kept for reference)
 
 int main(){
 
