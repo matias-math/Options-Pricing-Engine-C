@@ -1,3 +1,3 @@
 # Options-Pricing-Engine-C
 
-**Goal:** A modular, object-oriented C++ pricing engine for European options using both analytical (Black-Scholes) and numerical (Monte Carlo) methods.
+**Goal:** A modular, object-oriented, C++ pricing engine for Asian options to conduce an empirical analysis of variance reduction efficacy in exotic options.
