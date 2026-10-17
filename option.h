@@ -26,7 +26,7 @@ class Option {
 
     
 };
-
+/* EUROPEAN OPTIONS (BEFORE CHANGING THE PROJECT'S GOAL)
 class EuropeanCallOption : public Option {
     public:
         EuropeanCallOption(double stock_price, double strike_price, double risk_free_rate, double volatility, double maturity_time)
@@ -48,3 +48,15 @@ class EuropeanPutOption : public Option {
             return std::max(0.0, getStrikePrice() - stock_price);
         }
 };
+*/
+class AsianOption : public Option {
+    public:
+        AsianOption(double stock_price, double strike_price, double risk_free_rate, double volatility, double maturity_time)
+            : Option(stock_price, strike_price, risk_free_rate, volatility, maturity_time) {}
+
+        double price() const;
+        double getPayOff(double average_stock_price) const {
+            return std::max(0.0, average_stock_price - getStrikePrice());
+        }
+};
+
