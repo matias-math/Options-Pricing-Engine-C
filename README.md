@@ -46,9 +46,9 @@ I structured the code using clean Object-Oriented principles and separation of c
 
 By plotting the `data.csv` output in Python, the theoretical math becomes visible:
 
-* **The Win:** For At-The-Money options, the Control Variates technique slashed the standard error to near zero, proving the mathematical optimization works.
-* **The Limit:** The 3D Error Surface vividly shows that at very high volatilities and deep Out-of-the-Money strikes, the linear correlation between the arithmetic and geometric averages breaks down, causing the error to rise—a mathematical limitation correctly captured and handled by the C++ engine.
-
+By plotting the `data.csv` output in Python, the empirical data reveals the exact behavior of the model:
+* **The Pricing Surface (Left):** Demonstrates a perfectly smooth, monotonically decreasing curve as strike $K$ increases, proving the stability of the variance-reduced Monte Carlo estimator.
+* **The Error Surface (Right):** The 3D Error Surface reveals that absolute Standard Error peaks in the high-volatility, deep In-The-Money (ITM) regime (low Strike). This is mathematically consistent: deep OTM options frequently expire worthless (yielding near-zero absolute variance), while deep ITM options inherit the massive absolute variance of the underlying asset under high volatility. Even at this peak, the Control Variates keep the absolute error tightly bounded around ~0.20.
 
 ![Image](Figure_1.png)
 
