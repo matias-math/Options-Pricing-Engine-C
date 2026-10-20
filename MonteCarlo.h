@@ -70,16 +70,20 @@ namespace MonteCarlo {
         double varGeo  = (sumGeoSquared - numPairs * meanGeo * meanGeo) / (numPairs - 1.0);
         double covariance = (sumCrossProduct - numPairs * meanArit * meanGeo) / (numPairs - 1.0);
 
-        double beta = covariance / varGeo;
+        double beta = 0.0;
+        double adjustedMeanArit = meanArit;
+        double adjustedVariance = varArit;
 
-        double adjustedMeanArit = meanArit - beta * (meanGeo - exactGeoPrice);
+        if (varGeo > 1e-14) {
+            beta = covariance / varGeo;
+            adjustedMeanArit = meanArit - beta * (meanGeo - exactGeoPrice);
+            adjustedVariance = varArit - (covariance * covariance) / varGeo;
+        }
 
-        double adjustedVariance = varArit - (covariance * covariance) / varGeo;
-
-
+        adjustedVariance = std::max(0.0, adjustedVariance);
 
         SimulationResult result;
-        result.price = adjustedMeanArit * discountFactor;
+        result.price = std::max(0.0, adjustedMeanArit * discountFactor); // Price cannot be negative
         result.stdError = std::sqrt(adjustedVariance / numPairs) * discountFactor;
 
         return result;
